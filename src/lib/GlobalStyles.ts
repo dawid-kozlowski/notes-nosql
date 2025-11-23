@@ -32,7 +32,6 @@ body{
   border: 1px solid var(--accent);
   resize: none;
   padding: 1.5rem;
-  box-sizing:content-box;
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;

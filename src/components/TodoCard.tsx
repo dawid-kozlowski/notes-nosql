@@ -28,8 +28,11 @@ export default TodoCard;
 const Card = styled.textarea<{ readOnly?: boolean }>`
   cursor: ${(props) => (props.readOnly ? "pointer" : "text")};
   border-color: ${(props) =>
-    props.readOnly ? "var(--border)" : "var(--text)"};
+    props.readOnly ? "var(--border)" : "var(--accent)"};
   color: ${(props) => (props.readOnly ? "var(--text)" : "white;")};
+
+  box-shadow: ${(props) =>
+    props.readOnly ? "none" : "0 0 10px var(--accent)"};
 
   &:focus {
     outline: none;
