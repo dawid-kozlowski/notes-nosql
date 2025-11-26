@@ -33,6 +33,7 @@ A minimal todo application demonstrating integrations with different NoSQL datab
 ## Getting Started
 
 ### Prerequisites
+
 - Node.js 16+ and npm
 - Redis instance (or configure connection in `server/.env`)
 
@@ -53,6 +54,7 @@ npm install
 **2. Configure Redis connection**
 
 Edit `server/.env`:
+
 ```
 REDIS_PASSWORD=your_redis_password
 ```
@@ -70,14 +72,3 @@ npm run dev
 ```
 
 The app will be available at `http://localhost:5173` (or the port shown in terminal).
-
-## Scripts
-
-**Client:**
-- `npm run dev` – Start development server
-- `npm run build` – Build for production
-- `npm run lint` – Run ESLint
-
-**Server:**
-- `npm run dev` – Start with nodemon (auto-reload)
-- `npm run start` – Start production server
