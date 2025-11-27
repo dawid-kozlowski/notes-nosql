@@ -1,22 +1,20 @@
 import styled from "styled-components";
 import { MdAddCircleOutline } from "react-icons/md";
 import { MdDeleteOutline } from "react-icons/md";
-import { saveText, getKey } from "../services/services";
+import { saveCard } from "../services/services";
 
 function Menu() {
   const handleSave = () => {
-    saveText("Automata", "2B");
-  };
-
-  const handleGet = () => {
-    getKey("Automata");
+    const timestamp = Date.now();
+    const newKey = `card:${timestamp}`;
+    saveCard(newKey, `New card created at ${timestamp}`);
   };
 
   return (
     <View>
       <Container>
         <Icon onClick={handleSave} as={MdAddCircleOutline} />
-        <Icon onClick={handleGet} as={MdDeleteOutline} />
+        <Icon as={MdDeleteOutline} />
       </Container>
     </View>
   );
@@ -27,15 +25,14 @@ export default Menu;
 const View = styled.div`
   display: flex;
   justify-content: center;
-
-  @media (max-width: 2075px) {
-    margin-top: 2rem;
-  }
+  margin-top: 2rem;
+  gap: 2rem;
 `;
 
 const Container = styled.div`
   display: flex;
   flex-direction: row;
+
   gap: 1rem;
   background-color: var(--surface);
   border: 1px solid var(--border);

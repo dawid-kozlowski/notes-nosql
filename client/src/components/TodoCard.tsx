@@ -2,23 +2,21 @@ import styled from "styled-components";
 import { useState } from "react";
 
 interface TodoCardProps {
-  title: string;
-  description: string;
+  content: string;
 }
 
-function TodoCard({ title, description }: TodoCardProps) {
+function TodoCard({ content }: TodoCardProps) {
   const [isReadOnly, setReadOnly] = useState<boolean>(true);
 
   return (
     <Card
       readOnly={isReadOnly}
-      onClick={() => setReadOnly((prev) => !prev)}
+      onDoubleClick={() => setReadOnly((prev) => !prev)}
       onBlur={() => {
         setReadOnly(true);
       }}
     >
-      {`${title}
-        ${description}`}
+      {`${content}`}
     </Card>
   );
 }
