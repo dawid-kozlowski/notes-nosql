@@ -4,19 +4,19 @@ import Menu from "./Menu";
 import useCards from "../hooks/useCards";
 
 function TodoList() {
-  const { isLoading, cards, error } = useCards();
+  const { isLoading, cards, error, reload } = useCards();
+
   return (
     <>
-      <Menu />
-
+      <Menu reload={reload} />
       <View>
         {isLoading && <Message>Loading...</Message>}
-        {error && <Message>Error: {error ?? "Unkown error"}</Message>}
+        {error && <Message>Error: {error ?? "Unknown error"}</Message>}
         {!isLoading && !error && cards.length === 0 && (
           <Message>No notes yet. Create one!</Message>
         )}
-        {cards.map((card, i) => (
-          <TodoCard key={i} content={card} />
+        {cards.map((card) => (
+          <TodoCard key={card.id} id={card.id} content={card.content} />
         ))}
       </View>
     </>
@@ -40,4 +40,5 @@ const Message = styled.div`
   color: var(--text);
   font-size: larger;
   font-weight: bold;
+  z-index: 1000;
 `;

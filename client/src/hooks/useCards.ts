@@ -1,29 +1,40 @@
 import { useState, useEffect } from "react";
 import { getCards } from "../services/services";
 
+export interface Card {
+  id: string;
+  content: string;
+}
+
 const useCards = () => {
-  const [cards, setCards] = useState<string[]>([]);
+  const [cards, setCards] = useState<Card[]>([]);
   const [isLoading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        const fetchedCards = await getCards();
-        setCards(fetchedCards);
-        setError(null);
-      } catch (err) {
-        setError((err as Error).message);
-      } finally {
-        setLoading(false);
-      }
-    };
+  const reload = async () => {
+    try {
+      setLoading(true);
+      const { keys, results } = await getCards();
+      setCards(
+        keys
+          .map((key: string, i: number) => ({
+            id: key,
+            content: results[i] || "",
+          }))
+          .filter((c: Card) => c.content)
+      );
+      setError(null);
+    } catch (err) {
+      setError((err as Error).message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    fetchData();
+  useEffect(() => {
+    reload();
   }, []);
 
-  return { cards, isLoading, error };
+  return { cards, isLoading, error, reload, setCards };
 };
-
 export default useCards;

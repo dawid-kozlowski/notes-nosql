@@ -1,20 +1,46 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { MdAddCircleOutline } from "react-icons/md";
 import { MdDeleteOutline } from "react-icons/md";
-import { saveCard } from "../services/services";
+import { saveCard, delCard } from "../services/services";
+import { useCardStore } from "../stores/cardStore";
 
-function Menu() {
-  const handleSave = () => {
-    const timestamp = Date.now();
-    const newKey = `card:${timestamp}`;
-    saveCard(newKey, `New card created at ${timestamp}`);
+function Menu({ reload }: { reload: () => Promise<void> }) {
+  const { editingCard, setEditingCard } = useCardStore();
+
+  const handleSave = async () => {
+    const date = Date.now();
+    const formattedDate = new Date(date).toLocaleString([], {
+      hour12: false,
+    });
+    const key = `card:${date}`;
+    await saveCard(key, `New card created at ${formattedDate}`);
+    await reload();
+    setEditingCard(null);
+  };
+
+  const handleDelete = async () => {
+    if (!editingCard) return;
+    await delCard(editingCard);
+    setEditingCard(null);
+    await reload();
   };
 
   return (
     <View>
       <Container>
-        <Icon onClick={handleSave} as={MdAddCircleOutline} />
-        <Icon as={MdDeleteOutline} />
+        <Icon
+          title="Add New Card"
+          onClick={handleSave}
+          as={MdAddCircleOutline}
+        />
+        <Icon
+          title="Delete Currently Outlined Card"
+          disabled={!!editingCard}
+          $variant="delete"
+          $disabled={!!editingCard}
+          onClick={handleDelete}
+          as={MdDeleteOutline}
+        />
       </Container>
     </View>
   );
@@ -32,7 +58,6 @@ const View = styled.div`
 const Container = styled.div`
   display: flex;
   flex-direction: row;
-
   gap: 1rem;
   background-color: var(--surface);
   border: 1px solid var(--border);
@@ -40,11 +65,10 @@ const Container = styled.div`
   border-radius: 50px;
 `;
 
-const Icon = styled.div`
+const Icon = styled.button<{ $variant?: "delete"; $disabled?: boolean }>`
   height: 37px;
   width: 37px;
   cursor: pointer;
-
   transition: transform 0.1s ease;
 
   &:hover {
@@ -54,4 +78,19 @@ const Icon = styled.div`
   &:active {
     transform: scale(0.95);
   }
+
+  ${({ $variant, $disabled }) =>
+    $variant === "delete" &&
+    css`
+      opacity: ${!$disabled ? "0.5" : "1"};
+      cursor: ${!$disabled ? "default" : "pointer"};
+
+      &:hover {
+        color: ${!$disabled ? "var(--text)" : "var(--accent)"};
+      }
+
+      &:active {
+        transform: ${!$disabled ? "none" : "scale(0.95)"};
+      }
+    `}
 `;
