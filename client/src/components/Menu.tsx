@@ -1,12 +1,16 @@
 import styled, { css } from "styled-components";
-import { MdAddCircleOutline } from "react-icons/md";
-import { MdDeleteOutline } from "react-icons/md";
-import { saveCard, delCard } from "../services/services";
+import {
+  MdAddCircleOutline,
+  MdDeleteForever,
+  MdDeleteOutline,
+} from "react-icons/md";
+import { saveCard, delCard, delCardAll } from "../services/services";
 import { useCardStore } from "../stores/cardStore";
+import { useState } from "react";
 
 function Menu({ reload }: { reload: () => Promise<void> }) {
   const { editingCard, setEditingCard } = useCardStore();
-
+  const [deleteAll, setDeleteAll] = useState<boolean>(false);
   const handleSave = async () => {
     const date = Date.now();
     const formattedDate = new Date(date).toLocaleString([], {
@@ -25,6 +29,12 @@ function Menu({ reload }: { reload: () => Promise<void> }) {
     await reload();
   };
 
+  const handleDeleteAll = async () => {
+    await delCardAll();
+    await reload();
+    setDeleteAll(false);
+  };
+
   return (
     <View>
       <Container>
@@ -41,16 +51,72 @@ function Menu({ reload }: { reload: () => Promise<void> }) {
           onClick={handleDelete}
           as={MdDeleteOutline}
         />
+        <Icon
+          title="Delete All Cards"
+          onClick={() => {
+            console.log(length);
+            setDeleteAll(true);
+          }}
+          as={MdDeleteForever}
+        />
       </Container>
+      {deleteAll && (
+        <DeleteContainer style={{ flexDirection: "column" }}>
+          <P>Delete all cards?</P>
+          <DeleteContainer>
+            <Button
+              onClick={() => {
+                handleDeleteAll();
+              }}
+            >
+              Yes
+            </Button>
+            <Button
+              onClick={() => {
+                setDeleteAll(false);
+              }}
+            >
+              Cancel
+            </Button>
+          </DeleteContainer>
+        </DeleteContainer>
+      )}
     </View>
   );
 }
 
 export default Menu;
 
+const DeleteContainer = styled.div`
+  display: flex;
+  gap: 0.5rem;
+`;
+
+const P = styled.p`
+  color: var(--accent);
+  font-weight: 600;
+  margin: 0;
+`;
+
+const Button = styled.button`
+  background-color: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  padding: 10px;
+  cursor: pointer;
+  font-weight: 600;
+
+  &:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+`;
+
 const View = styled.div`
   display: flex;
   justify-content: center;
+  align-items: center;
   margin-top: 2rem;
   gap: 2rem;
 `;

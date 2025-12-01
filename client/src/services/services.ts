@@ -36,3 +36,12 @@ export const delCard = async (key: string): Promise<void> => {
     throw err;
   }
 };
+
+export const delCardAll = async () => {
+  try {
+    await axios.delete(`${baseURL}/api/delete-all`);
+    console.log("All cards deleted.");
+  } catch (err) {
+    console.error("Failed to delete all cards:", err);
+  }
+};

@@ -21,9 +21,9 @@ function TodoCard({ id, content: initialContent }: TodoCardProps) {
 
   const handleBlur = async () => {
     if (isEditing && content !== initialContent) {
-      await saveCard(id, content);
+      const response = await saveCard(id, content);
       setEditingCard(null);
-      showSuccessMessage();
+      if (response.status === 200) showSuccessMessage();
     }
   };
 
