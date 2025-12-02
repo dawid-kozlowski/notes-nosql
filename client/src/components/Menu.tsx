@@ -3,8 +3,24 @@ import {
   MdAddCircleOutline,
   MdDeleteForever,
   MdDeleteOutline,
+  MdLibraryBooks,
+  MdDeleteSweep,
+  MdInfoOutline,
+  MdBusiness,
+  MdPlayCircle,
+  MdDelete,
 } from "react-icons/md";
-import { saveCard, delCard, delCardAll } from "../services/services";
+import {
+  saveCard,
+  delCard,
+  delCardAll,
+  getLibrary,
+  clearLibrary,
+  logLibraryData,
+  loadJsonCompany,
+  executeRedisJson,
+  clearJson,
+} from "../services/services";
 import { useCardStore } from "../stores/cardStore";
 import { useState } from "react";
 
@@ -59,6 +75,44 @@ function Menu({ reload }: { reload: () => Promise<void> }) {
           }}
           as={MdDeleteForever}
         />
+        <Separator>
+          <Icon
+            style={{ marginLeft: "1rem" }}
+            title="Load Library"
+            onClick={() => {
+              getLibrary();
+            }}
+            as={MdLibraryBooks}
+          />
+          <Icon
+            title="Clear Library Data"
+            onClick={() => clearLibrary()}
+            as={MdDeleteSweep}
+          />
+          <Icon
+            title="Log Library Data"
+            onClick={() => logLibraryData()}
+            as={MdInfoOutline}
+          />
+        </Separator>
+        <Separator>
+          <Icon
+            style={{ marginLeft: "1rem" }}
+            title="Load JSON Company"
+            onClick={() => loadJsonCompany()}
+            as={MdBusiness}
+          />
+          <Icon
+            title="Log RedisJSON Commands"
+            onClick={() => executeRedisJson()}
+            as={MdPlayCircle}
+          />
+          <Icon
+            title="Delete JSON Company"
+            onClick={() => clearJson()}
+            as={MdDelete}
+          />
+        </Separator>
       </Container>
       {deleteAll && (
         <DeleteContainer style={{ flexDirection: "column" }}>
@@ -86,6 +140,12 @@ function Menu({ reload }: { reload: () => Promise<void> }) {
 }
 
 export default Menu;
+
+const Separator = styled.div`
+  display: flex;
+  gap: 1rem;
+  border-left: 1px solid var(--accent);
+`;
 
 const DeleteContainer = styled.div`
   display: flex;
