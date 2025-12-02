@@ -39,9 +39,63 @@ export const delCard = async (key: string): Promise<void> => {
 
 export const delCardAll = async () => {
   try {
-    const response = await axios.delete(`${baseURL}/api/delete-all`);
-    console.log(response.data.message);
+    await axios.delete(`${baseURL}/api/delete-all`);
+    console.log("All cards deleted.");
   } catch (err) {
     console.error("Failed to delete all cards:", err);
+  }
+};
+
+export const getLibrary = async () => {
+  try {
+    const response = await axios.post(`${baseURL}/api/load-library`);
+    console.log(response.data.message);
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const clearLibrary = async () => {
+  try {
+    const response = await axios.delete(`${baseURL}/api/clear-library`);
+    console.log(response.data.message);
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const logLibraryData = async () => {
+  try {
+    const response = await axios.get(`${baseURL}/api/library-data`);
+    console.log("Library Data:", response.data.data);
+  } catch (err) {
+    console.error("Failed to fetch library data:", err);
+  }
+};
+
+export const loadJsonCompany = async () => {
+  try {
+    const response = await axios.post(`${baseURL}/api/load-json`);
+    console.log(response.data.message);
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const executeRedisJson = async () => {
+  try {
+    const response = await axios.get(`${baseURL}/api/demo-json`);
+    console.log("JSON commands results:", response.data.results);
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const clearJson = async () => {
+  try {
+    const response = await axios.delete(`${baseURL}/api/delete-json`);
+    console.log(response.data.message);
+  } catch (err) {
+    console.error(err);
   }
 };
