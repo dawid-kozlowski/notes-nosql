@@ -1,0 +1,136 @@
+{
+  "firma": {
+    "nazwa": "TechNova Solutions Sp. z o.o.",
+    "nip": "1234567890",
+    "krs": 987654,
+    "dataZalozenia": "2015-03-15",
+    "aktywna": true,
+    "pracownicy": [
+      {
+        "id": 1,
+        "imie": "Anna",
+        "nazwisko": "Kowalska",
+        "wiek": 29,
+        "stanowisko": "Senior Frontend Developer",
+        "manager": false,
+        "umiejetnosci": [
+          "JavaScript",
+          "TypeScript",
+          "React",
+          "Vue.js",
+          "Node.js",
+          "Redis"
+        ],
+        "wynagrodzenie": 8500.5,
+        "premie": [1200.0, 1500.75, 2000.0],
+        "adres": {
+          "ulica": "Marszalkowska 100",
+          "miasto": "Warszawa",
+          "kodPocztowy": "00-001",
+          "kraj": "Polska"
+        },
+        "projekty": {
+          "aktualne": ["WebApp_v2", "MobileAPI"],
+          "zakonczone": ["Ecommerce_v1", "CRM_System"]
+        }
+      },
+      {
+        "id": 2,
+        "imie": "Piotr",
+        "nazwisko": "Nowak",
+        "wiek": 35,
+        "stanowisko": "Backend Architect",
+        "manager": true,
+        "umiejetnosci": [
+          "Python",
+          "Django",
+          "FastAPI",
+          "PostgreSQL",
+          "Docker",
+          "Kubernetes"
+        ],
+        "wynagrodzenie": 12500.0,
+        "premie": [3000.25, 4500.0],
+        "adres": {
+          "ulica": "Aleja Jerozolimskie 123",
+          "miasto": "Warszawa",
+          "kodPocztowy": "00-024",
+          "kraj": "Polska"
+        },
+        "projekty": {
+          "aktualne": ["Microservices", "DataPipeline"],
+          "zakonczone": ["LegacyMigration"]
+        }
+      },
+      {
+        "id": 3,
+        "imie": "Katarzyna",
+        "nazwisko": "Wisniewska",
+        "wiek": 28,
+        "stanowisko": "DevOps Engineer",
+        "manager": false,
+        "umiejetnosci": [
+          "AWS",
+          "Terraform",
+          "Jenkins",
+          "Prometheus",
+          "Grafana"
+        ],
+        "wynagrodzenie": 9800.75,
+        "premie": [800.5],
+        "adres": {
+          "ulica": "Grunwaldzka 45",
+          "miasto": "Gdansk",
+          "kodPocztowy": "80-309",
+          "kraj": "Polska"
+        },
+        "projekty": {
+          "aktualne": ["CI_CD_Pipeline"],
+          "zakonczone": []
+        }
+      }
+    ],
+    "dzialy": {
+      "frontend": {
+        "liczbaPracownikow": 8,
+        "budzetRoczny": 850000.0,
+        "lider": "Anna Kowalska",
+        "technologie": ["React", "Vue", "Angular"]
+      },
+      "backend": {
+        "liczbaPracownikow": 12,
+        "budzetRoczny": 1200000.75,
+        "lider": "Piotr Nowak",
+        "technologie": ["Python", "Node.js", "Java"]
+      },
+      "devops": {
+        "liczbaPracownikow": 5,
+        "budzetRoczny": 650000.25,
+        "lider": "Katarzyna Wisniewska",
+        "technologie": ["AWS", "Docker", "Kubernetes"]
+      }
+    },
+    "projekty": [
+      {
+        "nazwa": "WebApp_v2",
+        "status": "aktywny",
+        "budzet": 250000.0,
+        "deadline": "2025-06-30",
+        "zespol": [1, 2, 3]
+      },
+      {
+        "nazwa": "MobileAPI",
+        "status": "planowanie",
+        "budzet": 180000.5,
+        "deadline": "2025-09-15",
+        "zespol": [1, 2]
+      }
+    ],
+    "statystyki": {
+      "srednieWynagrodzenie": 9433.08,
+      "medianaWieku": 31,
+      "procentManagerow": 0.333,
+      "najpopularniejszaUmiejetnosc": "JavaScript"
+    }
+  }
+}
