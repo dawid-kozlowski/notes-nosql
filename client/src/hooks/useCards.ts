@@ -35,6 +35,6 @@ const useCards = () => {
     reload();
   }, []);
 
-  return { cards, isLoading, error, reload, setCards };
+  return { length, cards, isLoading, error, reload, setCards };
 };
 export default useCards;

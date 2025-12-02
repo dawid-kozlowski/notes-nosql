@@ -11,6 +11,7 @@ import { useState } from "react";
 function Menu({ reload }: { reload: () => Promise<void> }) {
   const { editingCard, setEditingCard } = useCardStore();
   const [deleteAll, setDeleteAll] = useState<boolean>(false);
+
   const handleSave = async () => {
     const date = Date.now();
     const formattedDate = new Date(date).toLocaleString([], {
@@ -54,7 +55,6 @@ function Menu({ reload }: { reload: () => Promise<void> }) {
         <Icon
           title="Delete All Cards"
           onClick={() => {
-            console.log(length);
             setDeleteAll(true);
           }}
           as={MdDeleteForever}
